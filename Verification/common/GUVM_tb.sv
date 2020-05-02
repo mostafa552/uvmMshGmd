@@ -2,3 +2,5 @@
 `include "test.svh"
 `include "jal.svh"
 `include "load.svh"
+`include "store.svh"
+`include "nop.svh"

@@ -2,7 +2,7 @@ class GUVM_env extends uvm_env;
     `uvm_component_utils(GUVM_env);
 
     GUVM_agent agent;
-    GUVM_monitor monitor_h;
+    GUVM_result_monitor monitor_h;
     GUVM_scoreboard sb;
     command_monitor command_monitor_h;
     
@@ -12,7 +12,7 @@ class GUVM_env extends uvm_env;
 
     function void build_phase(uvm_phase phase);
         agent = GUVM_agent::type_id::create("agent", this);
-        monitor_h = GUVM_monitor::type_id::create("monitor_h",this);
+        monitor_h = GUVM_result_monitor::type_id::create("monitor_h",this);
         command_monitor_h = command_monitor::type_id::create("command_monitor_h",this);
         sb = GUVM_scoreboard::type_id::create("sb",this);
     endfunction : build_phase

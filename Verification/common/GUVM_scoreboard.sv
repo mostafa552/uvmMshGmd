@@ -27,7 +27,7 @@ class GUVM_scoreboard extends uvm_scoreboard;
 		drv_fifo     = new("drv_fifo", this); 
 		mon_fifo     = new("mon_fifo", this);
 	endfunction : build_phase
-
+	
 	// write_drv_trans will be called when the driver broadcasts a transaction to the scoreboard
 	function void write_drv_trans (GUVM_sequence_item input_trans);
 		void'(drv_fifo.try_put(input_trans));
@@ -37,7 +37,7 @@ class GUVM_scoreboard extends uvm_scoreboard;
 	function void write_mon_trans (GUVM_result_transaction trans);
 		void'(mon_fifo.try_put(trans));
 	endfunction: write_mon_trans
-
+	
 	task run_phase(uvm_phase phase);
 		GUVM_sequence_item cmd_trans;	// stores drived transaction
 		GUVM_result_transaction res_trans;	// stores result transaction
@@ -47,17 +47,21 @@ class GUVM_scoreboard extends uvm_scoreboard;
 		integer valid;	// stores instruction validity in the used core
 		hist_trans = new("hist_trans"); 
 		forever begin
+			$display("-------------------------------");
 			$display("Scoreboard started");
 			drv_fifo.get(cmd_trans); // wait for driver to send drived transaction and get it
-			if (cmd_trans.v == 1)
-				mon_fifo.get(res_trans); // wait for monitor to send result transaction and get it
-			$display("Sc********************rd= %0d",cmd_trans.rd);
-			operand1 = cmd_trans.operand1; 
-			operand2 = cmd_trans.operand2;
+			mon_fifo.get(res_trans);
+			hist_trans.addItem(cmd_trans,res_trans);
+
+			//if (cmd_trans.v == 1)
+			//	mon_fifo.get(res_trans); // wait for monitor to send result transaction and get it
+			//$display("Sc********************rd= %0d",cmd_trans.rd);
+			//operand1 = cmd_trans.operand1; 
+			//operand2 = cmd_trans.operand2;
 			verified_inst = cmd_trans.inst;
-			$display("Sb: inst is %b %b %b %b %b %b %b %b", verified_inst[31:28], verified_inst[27:24], verified_inst[23:20], verified_inst[19:16], verified_inst[15:12], verified_inst[11:8], verified_inst[7:4], verified_inst[3:0]);
-			$display("Sb: op1=%0d ", operand1);
-			$display("Sb: op2=%0d", operand2);
+			//$display("Sb: inst is %b %b %b %b %b %b %b %b", verified_inst[31:28], verified_inst[27:24], verified_inst[23:20], verified_inst[19:16], verified_inst[15:12], verified_inst[11:8], verified_inst[7:4], verified_inst[3:0]);
+			//$display("Sb: op1=%0d ", operand1);
+			//$display("Sb: op2=%0d", operand2);
 			valid = 0;
 			// for loob to check that drived instruction is in opcodes array of the core
 			for(i=0;i<supported_instructions;i++) // supported instruction is number of instructions in opcodes array of the core
@@ -85,10 +89,17 @@ class GUVM_scoreboard extends uvm_scoreboard;
 					verify_load(cmd_trans,res_trans,hist_trans);
 				end
 				"Store":begin
-					
+					verify_store(cmd_trans,res_trans,hist_trans);
+				end
+				"NOP":begin
+					verify_nop(cmd_trans,res_trans,hist_trans);
 				end
 				default:`uvm_fatal("instruction fail", $sformatf("instruction is not add its %h", si_a[i]))
 			endcase
+			if(cmd_trans.SOM==SB_VERIFICATION_MODE)hist_trans.printItems();
+			$display("-------------------------------");
 		end
+		hist_trans.printItems();
+
 	endtask
 endclass: GUVM_scoreboard

@@ -6,7 +6,7 @@ package target_package;
     typedef enum logic [31:0] {
         LDW= 32'b11xxxxx000011xxxxx1xxxxxxxxxxxxx,
         A=32'b10xxxxx000000xxxxx000000000xxxxx,
-        N=32'b00000001000000000000000000000000,
+        NOP=32'b00000001000000000000000000000000,
         S=32'b10xxxxx000100xxxxx000000000xxxxx,
         Bie=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
         BA=32'b0011000010xxxxxxxxxxxxxxxxxxxxxx,
@@ -109,7 +109,8 @@ package target_package;
     function bit xis1 (logic[31:0] a,logic[31:0] b);
     logic x;
     x = (a == b);
-    if (x === 1'bx)
+    if(x==1) return 1 ;
+    else if (x === 1'bx)
         begin
             return 1'b1;
         end

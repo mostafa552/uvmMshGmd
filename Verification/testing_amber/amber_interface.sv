@@ -23,7 +23,7 @@ interface GUVM_interface;
     logic [31:0] data_in;
 
     // declaring the monitor
-    GUVM_monitor monitor_h;
+    GUVM_result_monitor monitor_h;
 
     // initializing the clk signal
     initial begin

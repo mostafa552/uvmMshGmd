@@ -32,7 +32,7 @@ class command_monitor extends uvm_component;
    endfunction : write_to_cmd_monitor*/
 
    function void write_to_cmd_monitor(GUVM_sequence_item cmd);
-      $display("cmd_monitor********************rd= %0d",cmd.rd);
+      //$display("cmd_monitor********************rd= %0d",cmd.rd);
       cmd.current_pc = bfm.get_cpc(); // getting current instruction pc 
       Drv2Sb_port.write(cmd); 
    endfunction : write_to_cmd_monitor

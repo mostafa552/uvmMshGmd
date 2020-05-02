@@ -81,7 +81,7 @@ interface GUVM_interface(input  clk );
 
     logic [31:0]next_pc;
 
-    GUVM_monitor monitor_h;
+    GUVM_result_monitor monitor_h;
 
     command_monitor command_monitor_h;
 

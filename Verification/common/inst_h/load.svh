@@ -4,9 +4,13 @@ function void verify_load(GUVM_sequence_item cmd_trans,GUVM_result_transaction r
     reg_data = cmd_trans.data;
 	$display("loadfn********************rd= %0d",cmd_trans.rd);
     reg_add = cmd_trans.rd;
-    hist_trans.loadreg(reg_data,reg_add);
-	if (cmd_trans.v == 1)
+    
+	if (cmd_trans.SOM == SB_HISTORY_MODE)
 	begin	
+		hist_trans.loadreg(reg_data,reg_add);
+
+	end
+	else if (cmd_trans.SOM == SB_VERIFICATION_MODE)begin
 		/*hc = res_trans.result;
 		if((h1) == (hc))
 		begin

@@ -10,6 +10,7 @@ class GUVM_sequence_item extends uvm_sequence_item;
    logic [31:0] zimm,simm,operand1,operand2,current_pc;// the 2 operands that shoould be at the registers
    logic [4:0]rs1,rs2,rd;
    logic v=0; 
+   GUVM_TB_SOM SOM = SB_HISTORY_MODE ;//score board operation mode
 
    
    protected function logic [31:0] generate_instruction(opcode target_instruction );
@@ -45,7 +46,8 @@ class GUVM_sequence_item extends uvm_sequence_item;
 
 
   function new (string name = "");
-    super.new(name);
+	super.new(name);
+	
   endfunction
 
   //copied and edited portion of code 
