@@ -65,6 +65,8 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
             genNop(5,0);
             start_item(store);
             finish_item(store);
+            start_item(store);
+            finish_item(store);
             genNop(6,0);
             command.SOM = SB_VERIFICATION_MODE ; 
             start_item(command);
