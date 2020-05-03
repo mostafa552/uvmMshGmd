@@ -7,6 +7,7 @@ package target_package;
 		//LW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0000011,
 		A = 32'b0000000xxxxxxxxxx000xxxxx0110011,
 		//SW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0100011,
+		NOP =32'h0000001B ,
 		Jal=32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111,
 		Store =32'b0000000xxxxx00000010000000100011,
         Load = 32'b00000000000000000010xxxxx0000011
@@ -154,6 +155,7 @@ package target_package;
 	function bit xis1 (logic[31:0] a,logic[31:0] b);
 		logic x;
 		x = (a == b);
+		if(x==1) return 1 ;
 		if (x === 1'bx)
 			begin
 				return 1'b1;

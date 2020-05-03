@@ -194,6 +194,7 @@ package target_package;
     function bit xis1 (logic[31:0] a,logic[31:0] b); 
         logic x;
         x = (a == b);
+        if(x==1) return 1 ;
         if (x === 1'bx)
             begin
                 return 1'b1;

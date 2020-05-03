@@ -81,7 +81,7 @@ interface GUVM_interface(input  clk );
 
     logic [31:0]next_pc;
 
-    GUVM_result_monitor monitor_h;
+    GUVM_result_monitor result_monitor_h;
 
     command_monitor command_monitor_h;
 
@@ -128,13 +128,16 @@ interface GUVM_interface(input  clk );
       get_npc();
     endtask
     
-    function void monitor_cmd(GUVM_sequence_item cmd);
+    function void update_command_monitor(GUVM_sequence_item cmd);
       command_monitor_h.write_to_cmd_monitor(cmd);
+    endfunction
+    function void update_result_monitor();
+      result_monitor_h.write_to_monitor(data_wdata_o,next_pc);
     endfunction
     // reveiving data from the DUT
     function logic [31:0] receive_data();
         $display("received result: %b", data_wdata_o);
-        monitor_h.write_to_monitor(data_wdata_o,next_pc);
+        result_monitor_h.write_to_monitor(data_wdata_o,next_pc);
         return data_wdata_o; 
     endfunction 
     
