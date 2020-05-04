@@ -1,13 +1,13 @@
 class GUVM_history_transaction extends uvm_transaction;
 
     logic [31:0]result; // stores logic and arithmetic instructions results ; why ? 
-    logic overflow,zero,neg=0;
+    logic overflow,zero,neg,carry=0;
     typedef struct {
         logic [31:0] data;
         logic [4:0] add; // suggestion : logic [31:0] add;
     } reg_history;
     typedef struct {
-        GUVM_sequence_item seq_item ;
+        GUVM_sequence_item cmd_trans ;
         GUVM_result_transaction res_trans; // suggestion : logic [31:0] add;
     } item ;
     reg_history reg_file [];
@@ -15,13 +15,25 @@ class GUVM_history_transaction extends uvm_transaction;
 
     function void addItem(GUVM_sequence_item seq, GUVM_result_transaction res) ;
         item_history = new[item_history.size() + 1](item_history);
-        item_history[item_history.size()-1].seq_item=seq;
+        item_history[item_history.size()-1].cmd_trans=seq;
         item_history[item_history.size()-1].res_trans=res;
     endfunction
     function void printItems() ; 
         $display("yay time to print my history");
         foreach(item_history[i])begin
-            $display("seq#",i," pc %d",item_history[i].seq_item.current_pc," inst %h ",item_history[i].seq_item.inst,"result:%h",item_history[i].res_trans.result);
+            string m="" ;
+            string s = "" ; 
+            $sformat(m,"seq#%d",i);
+            s={s ,m} ;
+            $sformat(m," pc %d",item_history[i].cmd_trans.current_pc);
+            s={s ,m} ;
+            $sformat(m," inst %h ",item_history[i].cmd_trans.inst);
+            s={s ,m} ;
+            $sformat(m,"result:%h",item_history[i].res_trans.result);
+            s={s ,m} ;
+            //s = {s ,m };"result:%h",item_history[i].res_trans.result
+            //$display("seq#",i," pc %d",item_history[i].seq_item.current_pc," inst %h ",item_history[i].seq_item.inst,"result:%h",item_history[i].res_trans.result);
+            $display(s);
         end
     endfunction
 

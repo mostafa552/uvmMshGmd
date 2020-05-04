@@ -74,7 +74,10 @@ interface GUVM_interface(input  clk );
     endfunction
 
     function logic[31:0] get_cpc();
-        return icache_input.rpc;
+        logic [31:0] x ;
+        x[1:0]=0;
+        x[31:2]=icache_input.rpc;
+        return x;
     endfunction
     /*
     function void monitor_cmd(GUVM_sequence_item cmd);

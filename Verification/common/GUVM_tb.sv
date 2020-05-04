@@ -4,3 +4,6 @@
 `include "load.svh"
 `include "store.svh"
 `include "nop.svh"
+`include "addcc.svh"
+`include "addx.svh"
+`include "bie.svh"

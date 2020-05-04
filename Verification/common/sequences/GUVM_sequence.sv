@@ -3,7 +3,7 @@
 
 class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
     `uvm_object_utils(GUVM_sequence);
-    target_seq_item command,load1,load2,store,nop , temp ;
+    target_seq_item command,load1,load2,store,nop ;
     target_seq_item c;
     function new(string name = "GUVM_sequence");
         super.new(name);
@@ -18,25 +18,7 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
             finish_item(nop);
         end
     endtask
-    /*
-    function  copy(target_seq_item targ);
-        temp = target_seq_item::type_id::create("temp");
-        temp.do_copy(targ);
-    endfunction
-    */
-    function target_seq_item copy(target_seq_item targ);
-        target_seq_item x ;
-        x = target_seq_item::type_id::create("x");
-        x.do_copy(targ);
-        return x ;
-    endfunction
     
-    
-    task send(target_seq_item targ);
-        start_item(targ);
-        finish_item(targ);
-    endtask
-
     task body();
         repeat(1)
         begin
@@ -66,32 +48,30 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
             end 
             store.store(command.rd);//specify regz address
 
-            
-			//send the sequence
-            
-            send(load1);
-            
-            genNop(5,load1.data);
-            
-            send(load2);
-            
-            genNop(5,load2.data);
-            
-            send(command);
-            
-            genNop(5,0);
-            
-            send(store);
-            temp = copy(store);
-            send(temp);
+			//specify regx and regy data
+            command.operand1=load1.data;
+            command.operand2=load2.data;
+            command.v=1;
 
+			//send the sequence
+            start_item(load1);
+            finish_item(load1);
+            genNop(5,load1.data);
+            start_item(load2);
+            finish_item(load2);
+            genNop(5,load2.data);
+            start_item(command);
+            finish_item(command);
             genNop(5,0);
-            temp = copy(command);
-            temp.SOM = SB_VERIFICATION_MODE ; 
-            send(temp);
-            
+            start_item(store);
+            finish_item(store);
+            start_item(store);
+            finish_item(store);
+            genNop(6,0);
+            command.SOM = SB_VERIFICATION_MODE ; 
+            start_item(command);
+            finish_item(command);
             //genNop(10);
-            
         end
     endtask : body
 

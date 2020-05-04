@@ -8,7 +8,7 @@ function void verify_add(GUVM_sequence_item cmd_trans,GUVM_result_transaction re
 
 	if (cmd_trans.SOM == SB_HISTORY_MODE)
 	begin	
-
+		hist_trans.loadreg(h1[31:0],cmd_trans.rd);
 		
 	end
 	else if (cmd_trans.SOM == SB_VERIFICATION_MODE)begin

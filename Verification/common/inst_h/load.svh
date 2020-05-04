@@ -2,7 +2,7 @@ function void verify_load(GUVM_sequence_item cmd_trans,GUVM_result_transaction r
 	bit [31:0]reg_data,i1,i2,h1 ;
     bit [4:0]reg_add;
     reg_data = cmd_trans.data;
-	$display("loadfn********************rd= %0d",cmd_trans.rd);
+	//$display("loadfn********************rd= %0d",cmd_trans.rd);
     reg_add = cmd_trans.rd;
     
 	if (cmd_trans.SOM == SB_HISTORY_MODE)

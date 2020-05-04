@@ -94,6 +94,15 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"NOP":begin
 					verify_nop(cmd_trans,res_trans,hist_trans);
 				end
+				"ADDCC":begin
+					verify_addcc(cmd_trans,res_trans,hist_trans);
+				end
+				"ADDX":begin
+					verify_addx(cmd_trans,res_trans,hist_trans);
+				end
+				"BIE":begin
+					verify_bie(cmd_trans,res_trans,hist_trans);
+				end
 				default:`uvm_fatal("instruction fail", $sformatf("instruction is not add its %h", si_a[i]))
 			endcase
 			if(cmd_trans.SOM==SB_VERIFICATION_MODE)hist_trans.printItems();
