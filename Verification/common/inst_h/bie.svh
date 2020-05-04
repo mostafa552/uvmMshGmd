@@ -2,7 +2,8 @@
 
 function void verify_bie(GUVM_sequence_item cmd_trans,GUVM_result_transaction res_trans,GUVM_history_transaction hist_trans);
 	logic [31:0] pc ;
-	logic dc ;
+	logic  dc ;
+	dc=0;
 	if (cmd_trans.SOM == SB_HISTORY_MODE)
 	begin	
 
