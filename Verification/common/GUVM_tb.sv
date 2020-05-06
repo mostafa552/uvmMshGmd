@@ -7,3 +7,4 @@
 `include "addcc.svh"
 `include "addx.svh"
 `include "bie.svh"
+`include "ba.svh"

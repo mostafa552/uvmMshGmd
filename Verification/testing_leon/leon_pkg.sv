@@ -12,7 +12,7 @@ package target_package;
         NOP=32'b00000001000000000000000000000000,
         S=32'b10xxxxx000100xxxxx000000000xxxxx,
         BIE=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
-        BA=32'b0011000010xxxxxxxxxxxxxxxxxxxxxx,
+        BA= 32'b0001000010xxxxxxxxxxxxxxxxxxxxxx,
         //Bie=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
         Store =32'b11xxxxx0001000000010000000000000,
         Load = 32'b11xxxxx0000000000010000000000000

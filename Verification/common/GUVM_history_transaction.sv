@@ -20,6 +20,11 @@ class GUVM_history_transaction extends uvm_transaction;
     endfunction
     function void printItems() ; 
         $display("yay time to print my history");
+
+        $display("--- reg_file Values are ---");
+        foreach(reg_file[i])   $display("\treg_file[%0d] = %p",i, reg_file[i]);
+        $display("---------------------------------");
+        
         foreach(item_history[i])begin
             string m="" ;
             string s = "" ; 
@@ -33,6 +38,7 @@ class GUVM_history_transaction extends uvm_transaction;
             s={s ,m} ;
             //s = {s ,m };"result:%h",item_history[i].res_trans.result
             //$display("seq#",i," pc %d",item_history[i].seq_item.current_pc," inst %h ",item_history[i].seq_item.inst,"result:%h",item_history[i].res_trans.result);
+
             $display(s);
         end
     endfunction
@@ -55,18 +61,21 @@ class GUVM_history_transaction extends uvm_transaction;
             if (reg_file[i].add == add) // if register address alreeady in regfile we overwrite the data
             begin
                 reg_file[i] = temp;
+                /*
                 $display("--- reg_file Values are ---");
                 foreach(reg_file[i])   $display("\treg_file[%0d] = %p",i, reg_file[i]);
                 $display("---------------------------------");
+                */
                 return;
             end
         end
         //this line will lose all previous data in reg file with each call reg_file = new[reg_file.size() + 1](reg_file); 
         reg_file = new[reg_file.size() + 1](reg_file); // after checking that address is empty in regfile
         reg_file[reg_file.size()-1]=temp; // we make new register 
-        $display("--- reg_file Values are ---");
+        /*$display("--- reg_file Values are ---");
         foreach(reg_file[i])   $display("\treg_file[%0d] = %p",i, reg_file[i]);
         $display("---------------------------------");
+        */
     endfunction : loadreg
 
     function logic[31:0] get_reg_data(logic [4:0]add);

@@ -47,8 +47,8 @@ class GUVM_scoreboard extends uvm_scoreboard;
 		integer valid;	// stores instruction validity in the used core
 		hist_trans = new("hist_trans"); 
 		forever begin
-			$display("-------------------------------");
-			$display("Scoreboard started");
+			//$display("-------------------------------");
+			//$display("Scoreboard started");
 			drv_fifo.get(cmd_trans); // wait for driver to send drived transaction and get it
 			mon_fifo.get(res_trans);
 			hist_trans.addItem(cmd_trans,res_trans);
@@ -74,7 +74,7 @@ class GUVM_scoreboard extends uvm_scoreboard;
 			if(valid == 0) begin // if valid still zero then instruction isn't found in opcodes array
 				`uvm_fatal("instruction fail", $sformatf("Sb: instruction not in pkg and its %b %b %b %b %b %b %b %b", verified_inst[31:28], verified_inst[27:24], verified_inst[23:20], verified_inst[19:16], verified_inst[15:12], verified_inst[11:8], verified_inst[7:4], verified_inst[3:0]))
 			end
-			$display("si_a[i] is %s in index %0d",si_a[i].name,i);
+			//$display("si_a[i] is %s in index %0d",si_a[i].name,i);
 			case (si_a[i].name) // determining which instuction we verify  
 				"A":begin // add two registers
 					verify_add(cmd_trans,res_trans,hist_trans);
@@ -102,6 +102,9 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				end
 				"BIE":begin
 					verify_bie(cmd_trans,res_trans,hist_trans);
+				end
+				"BA":begin
+					verify_ba(cmd_trans,res_trans,hist_trans);
 				end
 				default:`uvm_fatal("instruction fail", $sformatf("instruction is not add its %h", si_a[i]))
 			endcase

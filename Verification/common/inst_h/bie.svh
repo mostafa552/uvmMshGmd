@@ -22,6 +22,7 @@ function void verify_bie(GUVM_sequence_item cmd_trans,GUVM_result_transaction re
 				 break ; 
 				end
 				else begin
+					
 					dc=0;
 				end
 			end

@@ -47,43 +47,15 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
             //nop = target_seq_item::type_id::create("nop"); 
             //opcode x=A ;
            // $display("hello , this is the sequence,%d",command.upper_bit);
-            command.ran_constrained(ADDCC); // first randomize the instruction as an add (A is the enum code for add)
+            //command.ran_constrained(ADDCC); // first randomize the instruction as an add (A is the enum code for add)
             //nop.ran_constrained(NOP);
-            command.setup();//set up the instruction format fields 
-            if ($isunknown(command.rs1))
-                load1.load(0);
-            else
-            begin
-                load1.load(command.rs1);//specify regx address
-                load1.rd=command.rs1;
-            end
-            if ($isunknown(command.rs2))
-                load2.load(0);
-            else
-            begin
-                load2.load(command.rs2);//specify regx address  
-                load2.rd=command.rs2;
-            end 
-            //store.store(command.rd);//specify regz address
-            branch.ran_constrained(BIE);
-            load1.data = 32'hFFFFFFFF;
-            load2.data = 32'h1;
+            //command.setup();//set up the instruction format fields 
 
+            //store.store(command.rd);//specify regz address
+            branch.ran_constrained(BA);
 
             
 			//send the sequence
-            
-            send(load1);
-            
-            genNop(5,load1.data);
-            
-            send(load2);
-            
-            genNop(5,load2.data);
-            
-            send(command);
-            
-            genNop(5,0);
             
             send(branch);
             genNop(10,0);
