@@ -5,6 +5,8 @@ package target_package;
     // instructions opcodes verified in this core 
 	typedef enum logic[31:0] {
 		//LW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0000011,
+		ADDCC = 0 ,
+		BIE = 1 , 
 		A = 32'b0000000xxxxxxxxxx000xxxxx0110011,
 		//SW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0100011,
 		NOP =32'h0000001B ,
