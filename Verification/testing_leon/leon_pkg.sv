@@ -9,6 +9,8 @@ package target_package;
         ADDCC=32'b10xxxxx010000xxxxx000000000xxxxx,
         ADDX =32'b10xxxxx001000xxxxx000000000xxxxx,
         Ai=32'b10xxxxx000000xxxxx1xxxxxxxxxxxxx,
+        Jalr_cpc=32'b10xxxxx111000xxxxx10000000001100,
+        Jalrr=32'b10xxxxx111000xxxxx000000000xxxxx,
         NOP=32'b00000001000000000000000000000000,
         S=32'b10xxxxx000100xxxxx000000000xxxxx,
         BIE=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,

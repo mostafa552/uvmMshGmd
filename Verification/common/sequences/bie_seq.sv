@@ -1,11 +1,11 @@
 
 //generates the sequence of instructions needed to test an add instruction 
 
-class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
-    `uvm_object_utils(GUVM_sequence);
-    target_seq_item command,load1,load2,branch,nop , temp ;
+class bie_sequence extends uvm_sequence #(GUVM_sequence_item);
+    `uvm_object_utils(bie_sequence);
+    target_seq_item command,load1,load2,branch,nop,reset,temp ;
     target_seq_item c;
-    function new(string name = "GUVM_sequence");
+    function new(string name = "bie_sequence");
         super.new(name);
     endfunction : new
 
@@ -40,6 +40,7 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
     task body();
         repeat(1)
         begin
+            reset=target_seq_item::type_id::create("reset");
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
             load2 = target_seq_item::type_id::create("load2"); //load register y with data dy
             command = target_seq_item::type_id::create("command");//send add instruction (or any other instruction under test)
@@ -47,7 +48,9 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
             //nop = target_seq_item::type_id::create("nop"); 
             //opcode x=A ;
            // $display("hello , this is the sequence,%d",command.upper_bit);
+           
             command.ran_constrained(ADDCC); // first randomize the instruction as an add (A is the enum code for add)
+            reset.SOM = SB_RESET_MODE;
             //nop.ran_constrained(NOP);
             command.setup();//set up the instruction format fields 
             if ($isunknown(command.rs1))
@@ -66,8 +69,11 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
             end 
             //store.store(command.rd);//specify regz address
             branch.ran_constrained(BIE);
+            load1.data = 32'hFFFFFFFF;
+            load2.data = 32'h1;
 
-            
+
+            send(reset);
 			//send the sequence
             
             send(load1);
@@ -97,5 +103,5 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
     endtask : body
 
 
-endclass : GUVM_sequence
+endclass : bie_sequence
 

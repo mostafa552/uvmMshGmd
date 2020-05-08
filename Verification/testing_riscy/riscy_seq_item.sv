@@ -68,7 +68,6 @@ class target_seq_item extends GUVM_sequence_item;
 			rs1 = RHS.rs1;
 			funct3 = RHS.funct3;
 			rd = RHS.rd;
-			v = RHS.v;
 			opcode = RHS.opcode;
 			immb11_0 = RHS.immb11_0;
 			immb11_5 = RHS.immb11_5;

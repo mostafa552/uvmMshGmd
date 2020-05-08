@@ -1,5 +1,6 @@
-function void verify_JumpAndLink(GUVM_sequence_item cmd_trans,GUVM_result_transaction res_trans,GUVM_history_transaction hist_trans);
-	bit [31:0]actual_r,exp_r,actual_npc,cpc,exp_npc,offset ; 
+function void verify_JumpAndLinkRegImm_cpc(GUVM_sequence_item cmd_trans,GUVM_result_transaction res_trans,GUVM_history_transaction hist_trans);
+	bit [31:0]actual_r,exp_r,actual_npc,cpc,exp_npc,offset,i1 ; 
+    i1 = hist_trans.get_reg_data(cmd_trans.rs1);
 	// cpc => current_pc, npc => next_pc, exp => expected, r => result in rd
 	if (cmd_trans.SOM == SB_HISTORY_MODE)
 	begin	
@@ -9,7 +10,7 @@ function void verify_JumpAndLink(GUVM_sequence_item cmd_trans,GUVM_result_transa
 	else if (cmd_trans.SOM == SB_VERIFICATION_MODE)begin
 		cpc = cmd_trans.current_pc ; 
 		$display("cpc = %0d",cpc);
-		offset =  cmd_trans.simm ;
+		offset =  i1 + cmd_trans.simm ;
 		$display("offset = 32h'%h 	32b'%b",offset,offset);
 		//actual_npc = cmd_trans.current_pc;
 		$display("npc = %0d",actual_npc);
@@ -25,17 +26,17 @@ function void verify_JumpAndLink(GUVM_sequence_item cmd_trans,GUVM_result_transa
 				 break ; 
 			end
 		end
-		exp_r = cpc + 32'd4 ;
-		exp_npc = cpc + offset;
+		exp_r = cpc ;
+		exp_npc = offset;
 		if((exp_r == actual_r) && (exp_npc == actual_npc))
 		begin
-			`uvm_info ("JumpAndLink_PASS", $sformatf("Actual register result=%d Expected register result=%d ", actual_r, exp_r), UVM_LOW)
-			`uvm_info ("JumpAndLink_PASS", $sformatf("Actual next pc=%d Expected next pc=%d ", actual_npc, exp_npc), UVM_LOW)
+			`uvm_info ("JumpAndLinkRegImm_PASS", $sformatf("Actual register result=%d Expected register result=%d ", actual_r, exp_r), UVM_LOW)
+			`uvm_info ("JumpAndLinkRegImm_PASS", $sformatf("Actual next pc=%d Expected next pc=%d ", actual_npc, exp_npc), UVM_LOW)
 		end
 		else
 		begin
-			`uvm_error ("JumpAndLink_FAIL", $sformatf("Actual register result=%d Expected register result=%d ", actual_r, exp_r))
-			`uvm_error ("JumpAndLink_FAIL", $sformatf("Actual next pc=%d Expected next pc=%d ", actual_npc, exp_npc))	
+			`uvm_error ("JumpAndLinkRegImm_FAIL", $sformatf("Actual register result=%d Expected register result=%d ", actual_r, exp_r))
+			`uvm_error ("JumpAndLinkRegImm_FAIL", $sformatf("Actual next pc=%d Expected next pc=%d ", actual_npc, exp_npc))	
 		end
 	end
 endfunction

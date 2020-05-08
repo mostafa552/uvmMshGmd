@@ -9,6 +9,7 @@ package target_package;
 		//SW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0100011,
 		NOP =32'h0000001B ,
 		Jal=32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111,
+		Jalr=32'bxxxxxxxxxxxxxxxxx000xxxxx1100111,
 		Store =32'b0000000xxxxx00000010000000100011,
         Load = 32'b00000000000000000010xxxxx0000011
 	} opcode;

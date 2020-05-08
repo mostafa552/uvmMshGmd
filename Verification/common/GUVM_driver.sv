@@ -19,8 +19,8 @@ class GUVM_driver extends uvm_driver #(target_seq_item);
         target_seq_item cmd;
 
        // $display("driver has started");
-        bfm.reset_dut(); // resetting core 
-        bfm.set_Up();   // setting up core's inputs with costant values
+        //bfm.reset_dut(); // resetting core 
+        //bfm.set_Up();   // setting up core's inputs with costant values
         //$display("driver started fetching");
 
         forever begin: cmd_loop
@@ -28,11 +28,21 @@ class GUVM_driver extends uvm_driver #(target_seq_item);
             seq_item_port.get_next_item(cmd); //getting first instrucion in sequence (1st load)
             //bfm.monitor_cmd(cmd);
             //bfm.load(cmd.inst, cmd.data); // drive it to dut through interface
-            bfm.send_inst(cmd.inst);
-            bfm.send_data(cmd.data);
-            bfm.update_command_monitor(cmd);
-            bfm.update_result_monitor();
-            bfm.toggle_clk(1);
+            if (cmd.SOM==SB_RESET_MODE)begin
+                bfm.reset_dut(); // resetting core 
+                bfm.set_Up();   // setting up core's inputs with costant values
+                bfm.update_command_monitor(cmd);
+                bfm.update_result_monitor();
+            end
+            else
+            begin
+                bfm.send_inst(cmd.inst);
+                bfm.send_data(cmd.data);
+                bfm.update_command_monitor(cmd);
+                bfm.update_result_monitor();
+                bfm.toggle_clk(1);
+            end
+            
             seq_item_port.item_done();
             /*
             //first load

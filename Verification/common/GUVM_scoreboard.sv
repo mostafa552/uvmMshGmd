@@ -63,6 +63,10 @@ class GUVM_scoreboard extends uvm_scoreboard;
 			//$display("Sb: op1=%0d ", operand1);
 			//$display("Sb: op2=%0d", operand2);
 			valid = 0;
+			if (cmd_trans.SOM==SB_RESET_MODE)begin
+                hist_trans.reset(); // resetting core 
+			end
+			else begin
 			// for loob to check that drived instruction is in opcodes array of the core
 			for(i=0;i<supported_instructions;i++) // supported instruction is number of instructions in opcodes array of the core
 				begin
@@ -75,6 +79,11 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				`uvm_fatal("instruction fail", $sformatf("Sb: instruction not in pkg and its %b %b %b %b %b %b %b %b", verified_inst[31:28], verified_inst[27:24], verified_inst[23:20], verified_inst[19:16], verified_inst[15:12], verified_inst[11:8], verified_inst[7:4], verified_inst[3:0]))
 			end
 			//$display("si_a[i] is %s in index %0d",si_a[i].name,i);
+
+
+
+
+
 			case (si_a[i].name) // determining which instuction we verify  
 				"A":begin // add two registers
 					verify_add(cmd_trans,res_trans,hist_trans);
@@ -106,12 +115,22 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"BA":begin
 					verify_ba(cmd_trans,res_trans,hist_trans);
 				end
+				"Jalr":begin
+					verify_JumpAndLinkRegImm(cmd_trans,res_trans,hist_trans);
+				end
+				"Jalr_cpc":begin
+					verify_JumpAndLinkRegImm_cpc(cmd_trans,res_trans,hist_trans);
+				end
+				"Jalrr":begin
+					verify_JumpAndLinkRegReg(cmd_trans,res_trans,hist_trans);
+				end
 				default:`uvm_fatal("instruction fail", $sformatf("instruction is not add its %h", si_a[i]))
 			endcase
 			if(cmd_trans.SOM==SB_VERIFICATION_MODE)hist_trans.printItems();
 			$display("-------------------------------");
-		end
-		hist_trans.printItems();
+			end
+	end
+		//hist_trans.printItems();
 
 	endtask
 endclass: GUVM_scoreboard

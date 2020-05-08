@@ -22,7 +22,7 @@ while (1):
 		os.system("vsim -c -do ../testing_leon/run_tb.do")
 	elif g == "3":
 		os.system("vsim -c -do ../testing_amber/run_amber.do")
-	elif g == "w":
+	elif g == "w1":
 		os.system("vsim -view vsim.wlf -do ../testing_riscy/wave.do")
 	elif g == "w2":
 		os.system("vsim -view vsim.wlf -do ../testing_leon/wave.do")

@@ -116,9 +116,25 @@ interface GUVM_interface(input  clk );
     endfunction
 
     // sending instructions to the core
-    function void send_inst(logic [31:0] inst);
-        instr_rdata_i = inst; 
-    endfunction
+    task send_inst(logic [31:0] inst);
+        if (inst == 32'h0000001B)
+        begin
+          instr_gnt_i           = 1'b0;
+          instr_rvalid_i        = 1'b0;
+          //data_gnt_i            = 1'b1;
+          //data_rvalid_i         = 1'b0;
+        end
+        else
+        begin
+          instr_gnt_i           = 1'b1;
+          toggle_clk(1);
+          instr_rvalid_i        = 1'b1;
+          instr_gnt_i           = 1'b0;
+          //data_gnt_i            = 1'b0;
+          //data_rvalid_i         = 1'b1;
+        end
+        instr_rdata_i = inst;
+    endtask
     
     // sending the instruction to be verified
     task verify_inst(logic [31:0] inst,logic [31:0]op1,logic [31:0]op2,logic [31:0]simm);
@@ -163,7 +179,7 @@ interface GUVM_interface(input  clk );
     endfunction
 
     task get_npc();
-      toggle_clk(1);
+      //toggle_clk(1);
       $display("next_pc = %b       %t", instr_addr_o,$time);
       next_pc = instr_addr_o;
     endtask
@@ -178,8 +194,8 @@ interface GUVM_interface(input  clk );
 
         core_id_i             = 4'h0;
         cluster_id_i          = 6'h0;
-        instr_gnt_i           = 1'b1;
-        instr_rvalid_i        = 1'b1;
+        //instr_gnt_i           = 1'b0;
+        //instr_rvalid_i        = 1'b1;
 
         data_gnt_i            = 1'b1;
         data_rvalid_i         = 1'b1;

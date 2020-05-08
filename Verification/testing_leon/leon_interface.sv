@@ -76,7 +76,7 @@ interface GUVM_interface(input  clk );
     function logic[31:0] get_cpc();
         logic [31:0] x ;
         x[1:0]=0;
-        x[31:2]=icache_input.rpc;
+        x[31:2]=icache_input.fpc;
         return x;
     endfunction
     /*

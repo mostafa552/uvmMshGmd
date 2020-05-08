@@ -3,7 +3,8 @@ vlib work
 onerror {quit}
 
 vcom -f ../testing_leon/DUT_LEON.f 
-vlog +incdir+../testing_leon+../common+../common/inst_h ../testing_leon/target_pkg.sv
+vlog +incdir+../testing_leon+../common+../common/inst_h+../common/Tests+../common/sequences ../testing_leon/target_pkg.sv
+
 vlog ../testing_leon/leon_interface.sv
 vlog ../testing_leon/top.sv
 

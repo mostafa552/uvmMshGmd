@@ -13,6 +13,20 @@ class GUVM_history_transaction extends uvm_transaction;
     reg_history reg_file [];
     item item_history [] ;
 
+    function void reset();
+        reg_file.delete();
+        item_history.delete();
+        overflow=1'bx ;
+        zero=1'bx ;
+        neg=1'bx ;
+        carry=1'bx ; 
+        result = 32'dx;
+
+        
+        //printItems();
+        //$display("done deleting");
+    endfunction
+
     function void addItem(GUVM_sequence_item seq, GUVM_result_transaction res) ;
         item_history = new[item_history.size() + 1](item_history);
         item_history[item_history.size()-1].cmd_trans=seq;

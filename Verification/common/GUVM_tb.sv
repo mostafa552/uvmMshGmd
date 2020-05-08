@@ -8,3 +8,6 @@
 `include "addx.svh"
 `include "bie.svh"
 `include "ba.svh"
+`include "jalr.svh"
+`include "jalr_cpc.svh"
+`include "jalrr.svh"

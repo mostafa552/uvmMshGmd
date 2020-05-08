@@ -38,7 +38,7 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
     endtask
 
     task body();
-        repeat(1)
+        repeat(10)
         begin
             reset=target_seq_item::type_id::create("reset");
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx

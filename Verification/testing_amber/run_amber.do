@@ -3,7 +3,8 @@ vlib work
 onerror {quit}
 
 vlog -f ../testing_amber/dut_amber.f 
-vlog +incdir+../testing_amber+../common+../common/inst_h ../testing_amber/target_pkg.sv
+vlog +incdir+../testing_leon+../common+../common/inst_h+../common/Tests+../common/sequences ../testing_leon/target_pkg.sv
+
 vlog ../testing_amber/amber_interface.sv
 vlog ../testing_amber/top.sv
 
