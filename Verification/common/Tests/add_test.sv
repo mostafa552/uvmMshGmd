@@ -1,9 +1,7 @@
-class add_test extends uvm_test;
+class add_test extends GUVM_test;
     `uvm_component_utils(add_test);
 
-    GUVM_env       env_h;
-    add_sequence generic_sequence_h;
-
+    
     function new(string name = "add_test", uvm_component parent);
         super.new(name, parent);
     endfunction: new
@@ -12,12 +10,6 @@ class add_test extends uvm_test;
         env_h   = GUVM_env::type_id::create("env_h",this);
         generic_sequence_h = add_sequence::type_id::create("generic_sequence_h");
     endfunction: build_phase 
-    
-    task run_phase(uvm_phase phase);
-        phase.raise_objection(this);
-        $display("test have started ");
-        generic_sequence_h.start(env_h.agent.sequencer);
-        phase.drop_objection(this);
-    endtask: run_phase
+ 
    
 endclass: add_test

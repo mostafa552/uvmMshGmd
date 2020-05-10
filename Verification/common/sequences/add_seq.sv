@@ -1,7 +1,7 @@
 
 //generates the sequence of instructions needed to test an add instruction 
 
-class add_sequence extends uvm_sequence #(GUVM_sequence_item);
+class add_sequence extends GUVM_sequence ;
     `uvm_object_utils(add_sequence);
     target_seq_item command,load1,load2,store,nop , temp,reset ;
     target_seq_item c;
@@ -9,38 +9,11 @@ class add_sequence extends uvm_sequence #(GUVM_sequence_item);
         super.new(name);
     endfunction : new
 
-    task genNop(integer i , logic[31:0] data );
-        repeat(i) begin
-            nop = target_seq_item::type_id::create("nop");
-            nop.ran_constrained(NOP); 
-            nop.data = data ; 
-            start_item(nop);
-            finish_item(nop);
-        end
-    endtask
-    /*
-    function  copy(target_seq_item targ);
-        temp = target_seq_item::type_id::create("temp");
-        temp.do_copy(targ);
-    endfunction
-    */
-    function target_seq_item copy(target_seq_item targ);
-        target_seq_item x ;
-        x = target_seq_item::type_id::create("x");
-        x.do_copy(targ);
-        return x ;
-    endfunction
-    
-    
-    task send(target_seq_item targ);
-        start_item(targ);
-        finish_item(targ);
-    endtask
 
     task body();
         repeat(10)
         begin
-            reset=target_seq_item::type_id::create("reset");
+            
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
             load2 = target_seq_item::type_id::create("load2"); //load register y with data dy
             command = target_seq_item::type_id::create("command");//send add instruction (or any other instruction under test)
@@ -48,8 +21,8 @@ class add_sequence extends uvm_sequence #(GUVM_sequence_item);
             //nop = target_seq_item::type_id::create("nop"); 
             //opcode x=A ;
            // $display("hello , this is the sequence,%d",command.upper_bit);
-            command.ran_constrained(A); // first randomize the instruction as an add (A is the enum code for add)
-            reset.SOM = SB_RESET_MODE;
+            command.ran_constrained(findOP("A")); // first randomize the instruction as an add (A is the enum code for add)
+            
             //nop.ran_constrained(NOP);
             command.setup();//set up the instruction format fields 
             if ($isunknown(command.rs1))
@@ -68,7 +41,7 @@ class add_sequence extends uvm_sequence #(GUVM_sequence_item);
             end 
             store.store(command.rd);//specify regz address
 
-            send(reset);
+            resetSeq();
 			//send the sequence
             
             send(load1);
@@ -91,7 +64,8 @@ class add_sequence extends uvm_sequence #(GUVM_sequence_item);
             temp = copy(command);
             temp.SOM = SB_VERIFICATION_MODE ; 
             send(temp);
-            send(reset);
+
+            resetSeq();
             //genNop(10);
             
         end

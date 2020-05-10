@@ -5,9 +5,9 @@ vlog +incdir+../testing_riscy+../common+../common/inst_h+../common/Tests+../comm
 vlog ../testing_riscy/riscy_interface.sv
 vlog ../testing_riscy/top.sv
 
-vsim -novopt top
+#vsim -novopt top
 
-log /* -r
+#log /* -r
 
-run -all
+#run -all
 quit

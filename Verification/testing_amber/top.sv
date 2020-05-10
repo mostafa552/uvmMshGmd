@@ -26,7 +26,7 @@ module top;
     initial begin
         uvm_config_db#(virtual GUVM_interface)::set(null, "*", "bfm", bfm);
         fill_si_array();
-        run_test("GUVM_test");
+        run_test();
     end
 
 endmodule : top

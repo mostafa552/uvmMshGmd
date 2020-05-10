@@ -52,7 +52,7 @@ module top;
     initial begin
         uvm_config_db#(virtual GUVM_interface)::set(null, "*", "bfm", bfm);
         fill_si_array();
-        run_test("add_test");
+        run_test();
     end
 
     initial begin 

@@ -9,9 +9,9 @@ vlog ../testing_leon/top.sv
 
 #+incdir+leon/DUT
 
-vsim top
+#vsim top
 
-log /* -r
-run -all
+#log /* -r
+#run -all
 
 quit

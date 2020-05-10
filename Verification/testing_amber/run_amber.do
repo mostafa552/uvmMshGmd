@@ -8,8 +8,8 @@ vlog +incdir+../testing_leon+../common+../common/inst_h+../common/Tests+../commo
 vlog ../testing_amber/amber_interface.sv
 vlog ../testing_amber/top.sv
 
-vsim top
+#vsim top
 
-run -all
-log /* -r
+#run -all
+#log /* -r
 quit
