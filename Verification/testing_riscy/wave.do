@@ -4,6 +4,7 @@ quietly WaveActivateNextPane {} 0
 add wave /top/bfm/clk_pseudo
 add wave vsim:/top/dut/instr_rdata_i 
 add wave vsim:/top/dut/data_rdata_i
+add wave vsim:/top/dut/data_addr_o
 add wave vsim:/top/dut/data_wdata_o
 add wave vsim:/top/dut/instr_addr_o
 add wave vsim:/top/dut/if_stage_i/branch_req

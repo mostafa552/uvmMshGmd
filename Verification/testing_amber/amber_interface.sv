@@ -1,8 +1,8 @@
-interface GUVM_interface;
+interface GUVM_interface(input clk);
     import target_package::*; // importing amber core package
 
     // core interface ports
-    logic       i_clk;
+    logic       clk_pseudo;
     logic       i_irq;
     logic       i_firq;
     logic       i_system_rdy;
@@ -22,13 +22,32 @@ interface GUVM_interface;
     logic [3:0] indicator;
     logic [31:0] data_in;
 
-    // declaring the monitor
-    GUVM_result_monitor monitor_h;
 
-    // initializing the clk signal
+    logic [31:0]next_pc=0;
+    // declaring the monitor
+    GUVM_result_monitor result_monitor_h;
+
+    command_monitor command_monitor_h;
+
+    bit allow_pseudo_clk;
+
+    // initializing the clk_pseudo signal
     initial begin
-        i_clk = 0;
-    end 
+        clk_pseudo = 0;
+        allow_pseudo_clk = 0 ;
+	end	
+
+    always @(clk) begin
+        if (allow_pseudo_clk)begin
+            clk_pseudo = clk;
+        end
+    end
+
+    task toggle_clk(integer i);
+      allow_pseudo_clk =1 ;
+      repeat(i)@(posedge clk_pseudo);
+      allow_pseudo_clk =0 ;
+    endtask
 
     // sending data to the core
     task send_data(logic [31:0] data);
@@ -37,10 +56,11 @@ interface GUVM_interface;
 
     // sending instructions to the core
     task send_inst(logic [31:0] inst);
-        indicator = inst[31:28]; // distinguishing the load instruction: amber only
+        //indicator = inst; // distinguishing the load instruction: amber only
         Rd = inst[15:12]; // destination register address bits: 4 bits 
-        if(indicator == 4'b1111) begin // accessing the register file by forcing
-            i_wb_dat = {96'hF0801003F0801003F0801003, inst};
+        $display("eh l 5ra da inst =%h and indic=%h",inst,{{16'haaaa},{Rd},{12'haaa}});
+        if(inst == {{16'haaaa},{Rd},{12'haaa}}) begin // accessing the register file by forcing
+            i_wb_dat = {128'hF0801003F0801003F0801003F0801003};
             case(Rd)
                 4'b0000: dut.u_execute.u_register_bank.r0 = data_in;
                 4'b0001: dut.u_execute.u_register_bank.r1 = data_in;
@@ -57,41 +77,53 @@ interface GUVM_interface;
         end
     endtask
 
-    // reveiving data from the DUT
-    function logic [127:0] receive_data();
-        $display("result: %h", o_wb_dat);
-        monitor_h.write_to_monitor(o_wb_dat);
-        return o_wb_dat;
+    function void update_command_monitor(GUVM_sequence_item cmd);
+      command_monitor_h.write_to_cmd_monitor(cmd);
+    endfunction
+    function void update_result_monitor();
+      result_monitor_h.write_to_monitor(o_wb_dat,next_pc);
     endfunction
 
+    function logic[31:0] get_cpc();
+      $display("current_pc = %b       %t", o_wb_adr,$time);
+      return o_wb_adr;
+    endfunction
+
+    // reveiving data from the DUT
+    // function logic [127:0] receive_data();
+    //     $display("result: %h", o_wb_dat);
+    //     result_monitor_h.write_to_monitor(o_wb_dat);
+    //     return o_wb_dat;
+    // endfunction
+
     // sending the instruction to be verified
-    task verify_inst(logic [31:0] inst);
-        send_inst(inst); 
-        repeat(2*50) begin 
-            #10 i_clk=~i_clk;
-        end
-    endtask
+    // task verify_inst(logic [31:0] inst);
+    //     send_inst(inst); 
+    //     repeat(2*50) begin 
+    //         #10 clk_pseudo=~clk_pseudo;
+    //     end
+    // endtask
 
     // dealing with the register file with the following load and store functions 
-    task store(logic [31:0] inst);
-        send_inst(inst);
-        repeat(2*10) begin 
-            #10 i_clk=~i_clk;
-        end
-        $display("result = %0d", receive_data());
-        repeat(2*10) begin 
-            #10 i_clk=~i_clk;
-        end
-    endtask
+    // task store(logic [31:0] inst);
+    //     send_inst(inst);
+    //     repeat(2*10) begin 
+    //         #10 clk_pseudo=~clk_pseudo;
+    //     end
+    //     $display("result = %0d", receive_data());
+    //     repeat(2*10) begin 
+    //         #10 clk_pseudo=~clk_pseudo;
+    //     end
+    // endtask
 
-    task load(logic [31:0] inst, logic [31:0] rd);
-        send_data(rd);
-        send_inst(inst);
-        send_data(rd);
-        repeat(2*50) begin 
-            #10 i_clk=~i_clk;
-        end
-    endtask
+    // task load(logic [31:0] inst, logic [31:0] rd);
+    //     send_data(rd);
+    //     send_inst(inst);
+    //     send_data(rd);
+    //     repeat(2*50) begin 
+    //         #10 clk_pseudo=~clk_pseudo;
+    //     end
+    // endtask
 
     // initializing the core
     task set_Up();
@@ -100,6 +132,7 @@ interface GUVM_interface;
         i_system_rdy = 1'b1;
         i_wb_ack = 1'b1;
         i_wb_err = 1'b0;
+        //toggle_clk(10);
     endtask: set_Up
 
     task reset_dut();

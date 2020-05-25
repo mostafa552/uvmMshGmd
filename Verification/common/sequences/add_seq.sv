@@ -11,7 +11,7 @@ class add_sequence extends GUVM_sequence ;
 
 
     task body();
-        repeat(10)
+        repeat(1)
         begin
             
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
@@ -21,10 +21,14 @@ class add_sequence extends GUVM_sequence ;
             //nop = target_seq_item::type_id::create("nop"); 
             //opcode x=A ;
            // $display("hello , this is the sequence,%d",command.upper_bit);
-            command.ran_constrained(findOP("A")); // first randomize the instruction as an add (A is the enum code for add)
+            //command.ran_constrained(findOP("A")); // first randomize the instruction as an add (A is the enum code for add)
+            command.ran_constrained(findOP(clp_inst));
             
             //nop.ran_constrained(NOP);
+            $display("before the setup %d",command.data);
             command.setup();//set up the instruction format fields 
+            $display("after the setup %d",command.data);
+
             if ($isunknown(command.rs1))
                 load1.load(0);
             else

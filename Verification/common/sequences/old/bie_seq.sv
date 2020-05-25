@@ -65,7 +65,7 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
                 load2.rd=command.rs2;
             end 
             //store.store(command.rd);//specify regz address
-            branch.ran_constrained(BIE);
+            branch.ran_constrained(BIEF);
             load1.data = 32'hFFFFFFFF;
             load2.data = 32'h1;
 

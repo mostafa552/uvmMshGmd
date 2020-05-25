@@ -1,0 +1,4 @@
+# ** Error: (vish-4014) No objects found matching 'vsim:/top/bfm/allow_pseudo_clk'.
+# Executing ONERROR command at macro ./../testing_leon/wave.do line 5
+# ** Error: invalid command name "vsim:/top/dut/rf0/inf/u0/rfss/u0/rfd"
+# Executing ONERROR command at macro ./../testing_leon/wave.do line 12

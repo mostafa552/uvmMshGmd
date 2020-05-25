@@ -1,5 +1,6 @@
 #if [file exists "work"] {vdel -all}
 #vlib work
+transcript file trans/compileTB.txt
 onerror {quit}
 
 #vcom -f ../testing_leon/DUT_LEON.f 

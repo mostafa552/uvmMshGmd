@@ -136,53 +136,17 @@ interface GUVM_interface(input  clk );
         instr_rdata_i = inst;
     endtask
     
-    // sending the instruction to be verified
-    task verify_inst(logic [31:0] inst,logic [31:0]op1,logic [31:0]op2,logic [31:0]simm);
-      send_inst(inst); 
-      toggle_clk(1);
-      nop();
-      get_npc();
-    endtask
-    
     function void update_command_monitor(GUVM_sequence_item cmd);
       command_monitor_h.write_to_cmd_monitor(cmd);
     endfunction
     function void update_result_monitor();
-      result_monitor_h.write_to_monitor(data_wdata_o,next_pc);
+      result_monitor_h.write_to_monitor(data_wdata_o,data_addr_o,data_be_o);
     endfunction
-    // reveiving data from the DUT
-    function logic [31:0] receive_data();
-        $display("received result: %b", data_wdata_o);
-        result_monitor_h.write_to_monitor(data_wdata_o,next_pc);
-        return data_wdata_o; 
-    endfunction 
-    
-    // dealing with the register file with the following load and store functions
-    task store(logic [31:0] inst);
-      send_inst(inst);
-      toggle_clk(6);
-      $display("result = %0d", receive_data());
-      toggle_clk(15);
-    endtask
-
-    task load(logic [31:0] inst, logic [31:0] rd);
-      send_inst(inst);
-      send_data(rd);
-      toggle_clk(1);
-      nop();
-      toggle_clk(4);
-    endtask
 
     function logic[31:0] get_cpc();
       $display("current_pc = %b       %t", instr_addr_o,$time);
       return instr_addr_o;
     endfunction
-
-    task get_npc();
-      //toggle_clk(1);
-      $display("next_pc = %b       %t", instr_addr_o,$time);
-      next_pc = instr_addr_o;
-    endtask
 
     // initializing the core
     task set_Up();

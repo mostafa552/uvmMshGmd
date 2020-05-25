@@ -1,0 +1,256 @@
+# vsim top +UVM_TESTNAME=mul_test +ARG_INST=UDIVR 
+# vsim top "+UVM_TESTNAME=mul_test" "+ARG_INST=UDIVR" 
+# Start time: 05:47:08 on May 24,2020
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# 
+# ** Warning: ../common/sequences/GUVM_sequence.sv(13): (vopt-2250) Function "clp" has no return value assignment.
+# 
+# //  Questa Sim-64
+# //  Version 10.4e win64 Apr  9 2016
+# //
+# //  Copyright 1991-2016 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+# //  WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION OR ITS
+# //  LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+# //  THIS DOCUMENT CONTAINS TRADE SECRETS AND COMMERCIAL OR FINANCIAL
+# //  INFORMATION THAT ARE PRIVILEGED, CONFIDENTIAL, AND EXEMPT FROM
+# //  DISCLOSURE UNDER THE FREEDOM OF INFORMATION ACT, 5 U.S.C. SECTION 552.
+# //  FURTHERMORE, THIS INFORMATION IS PROHIBITED FROM DISCLOSURE UNDER
+# //  THE TRADE SECRETS ACT, 18 U.S.C. SECTION 1905.
+# //
+# Loading sv_std.std
+# Loading work.iface__mti__sv__equiv__implct__pack(fast)
+# Loading mtiUvm.uvm_pkg
+# Loading work.target_package(fast)
+# Loading work.top(fast)
+# Loading mtiUvm.questa_uvm_pkg(fast)
+# Loading work.GUVM_interface(fast)
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading work.target
+# Loading ieee.std_logic_arith(body)
+# Loading work.device
+# Loading work.config
+# Loading work.sparcv8
+# Loading work.iface
+# Loading work.amba
+# Loading work.fpulib
+# Loading work.tech_map
+# Loading work.proc(rtl)#1
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.macro(body)
+# Loading work.iu(rtl)#1
+# Loading work.multlib
+# Loading work.mul(rtl)#1
+# Loading work.tech_generic
+# Loading work.hw_smult(rtl)#4
+# Loading work.generic_smult(rtl)#4
+# Loading work.div(rtl)#1
+# Loading work.tech_atc25
+# Loading work.tech_atc35
+# Loading work.tech_fs90
+# Loading work.tech_umc18
+# Loading work.tech_virtex
+# Loading work.regfile_iu(rtl)#1
+# Loading work.generic_regfile_iu(rtl)#1
+# Loading work.generic_dpram_ss(behav)#1
+# ** Warning: (vsim-3764) ../common/Tests/GUVM_test.sv(21): Stand-alone call to function 'clp' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /target_package File: ../testing_leon/leon_pkg.sv
+# ** Warning: (vsim-3764) ../common/Tests/python_test.sv(20): Stand-alone call to function 'clp' treated as implicit void cast.
+#    Time: 0 ns  Iteration: 0  Region: /target_package File: ../testing_leon/leon_pkg.sv
+# ** Warning: (vsim-8822) ../testing_leon/top.sv(9): [TFMPC] - Missing Verilog connection for formal VHDL port 'pcirst'.
+#    Time: 0 ns  Iteration: 0  Instance: /top/dut File: ../../new_duts/DUT_LEON_EDITED/DUT/proc.vhd
+# ** Warning: (vsim-8822) ../testing_leon/top.sv(9): [TFMPC] - Missing Verilog connection for formal VHDL port 'apbi'.
+#    Time: 0 ns  Iteration: 0  Instance: /top/dut File: ../../new_duts/DUT_LEON_EDITED/DUT/proc.vhd
+# ** Warning: (vsim-8822) ../testing_leon/top.sv(9): [TFMPC] - Missing Verilog connection for formal VHDL port 'apbo'.
+#    Time: 0 ns  Iteration: 0  Instance: /top/dut File: ../../new_duts/DUT_LEON_EDITED/DUT/proc.vhd
+# ** Warning: (vsim-8822) ../testing_leon/top.sv(9): [TFMPC] - Missing Verilog connection for formal VHDL port 'ahbi'.
+#    Time: 0 ns  Iteration: 0  Instance: /top/dut File: ../../new_duts/DUT_LEON_EDITED/DUT/proc.vhd
+# ** Warning: (vsim-8822) ../testing_leon/top.sv(9): [TFMPC] - Missing Verilog connection for formal VHDL port 'ahbo'.
+#    Time: 0 ns  Iteration: 0  Instance: /top/dut File: ../../new_duts/DUT_LEON_EDITED/DUT/proc.vhd
+# Loading D:/installedPrograms/MentorGraphics/questasim64_10.4e/uvm-1.1d\win64\uvm_dpi.dll
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/fpui.FpOp, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/fpui.FpOp.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/fpui.FpLd, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/fpui.FpLd.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/fpui.Reset, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/fpui.Reset.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/fpui.ss_scan_mode, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/fpui.ss_scan_mode.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/fpui.fp_ctl_scan_in, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/fpui.fp_ctl_scan_in.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.annul, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.annul.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.ld, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.ld.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.pv, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.pv.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.rett, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.rett.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.trap, and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.trap.
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.inst(31 downto 0), and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.inst(31 downto 0).
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.pc(31 downto 2), and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.pc(31 downto 2).
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.cnt(1 downto 0), and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.cnt(1 downto 0).
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.tt(5 downto 0), and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.tt(5 downto 0).
+# ** Warning: (vsim-8684) No drivers exist on out port /top/dut/iu0/iuo.debug.de.rd(7 downto 0), and its initial value is not used.
+# 
+# Therefore, simulation behavior may occur that is not in compliance with
+# 
+# the VHDL standard as the initial values come from the base signal /top/dut/iuol.debug.de.rd(7 downto 0).
+#  log /* -r 
+#  run -all 
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(215) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(217) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# UVM_INFO @ 0: reporter [RNTST] Running test mul_test...
+# UVM_INFO ../common/GUVM_env.sv(22) @ 0: uvm_test_top.env_h [] Called env::connect_phase
+# test have started 
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# -------------------------------
+# UVM_INFO ../common/inst_h/umulr.svh(67) @ 910: reporter [UMUL_PASS] 
+#  error report:
+# 
+# yay time to print my history
+# --- reg_file Values are ---
+# 	reg_file[0] = '{data:32, add:20} 00000020
+# 	reg_file[1] = '{data:4, add:4} 00000004
+# 	reg_file[2] = '{data:128, add:9} 00000080
+# ---------------------------------
+# seq#          0 pc         28 inst e8002000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          1 pc         32 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          2 pc         36 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          3 pc         40 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          4 pc         44 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          5 pc         48 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          6 pc         52 inst c8002000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          7 pc         56 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          8 pc         60 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#          9 pc         64 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         10 pc         68 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         11 pc         72 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         12 pc         76 inst 92550004 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         13 pc         80 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         14 pc         84 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         15 pc         88 inst 01000000 result:00000080 mem_add:00000080 data_write_e:0000
+# seq#         16 pc         92 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         17 pc         96 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         18 pc        100 inst d2202000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         19 pc        104 inst d2202000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         20 pc        104 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         21 pc        108 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         22 pc        112 inst 01000000 result:00000080 mem_add:00000080 data_write_e:0000
+# seq#         23 pc        116 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         24 pc        120 inst 01000000 result:00000000 mem_add:00000000 data_write_e:0000
+# seq#         25 pc         76 inst 92550004 result:00000000 mem_add:00000000 data_write_e:0000
+# -------------------------------
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1268) @ 1350: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :    6
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    0
+# ** Report counts by id
+# []     1
+# [Questa UVM]     2
+# [RNTST]     1
+# [TEST_DONE]     1
+# [UMUL_PASS]     1
+# ** Note: $finish    : D:/installedPrograms/MentorGraphics/questasim64_10.4e/win64/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
+#    Time: 1350 ns  Iteration: 64  Instance: /top
+# End time: 05:47:13 on May 24,2020, Elapsed time: 0:00:05
+# Errors: 0, Warnings: 23

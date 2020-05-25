@@ -70,7 +70,7 @@ interface GUVM_interface(input  clk );
     endfunction
     function void update_result_monitor();
         //result_monitor_h.write_to_monitor(dcache_input.edata,next_pc);
-        result_monitor_h.write_to_monitor(dcache_input.maddress,next_pc);
+        result_monitor_h.write_to_monitor(dcache_input.maddress,dcache_input.maddress,4'd0);
     endfunction
 
     function logic[31:0] get_cpc();
@@ -115,7 +115,7 @@ interface GUVM_interface(input  clk );
 	// reveiving data from the DUT
     function logic [31:0] receive_data();//should be protected
         //$display("madd : %b",dcache_input.maddress);
-        result_monitor_h.write_to_monitor(dcache_input.edata,next_pc);
+        result_monitor_h.write_to_monitor(dcache_input.edata,dcache_input.maddress,4'd0);
         return dcache_input.edata;
        // monitor_h.write_to_monitor(dcache_input.maddress);
 		//return dcache_input.maddress;
@@ -170,7 +170,7 @@ interface GUVM_interface(input  clk );
 
     // initializing the core
     task set_Up();
-        send_data(32'h100);
+        //send_data(32'h100);
         send_inst(32'h01000000);
 		pciclk = 1'b0;
         pcirst = 1'b0;

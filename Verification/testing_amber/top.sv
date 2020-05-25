@@ -4,10 +4,10 @@ module top;
     //import iface::*;
 
     `include "uvm_macros.svh"
-
-    GUVM_interface bfm();
+    logic clk ; 
+	GUVM_interface bfm(clk);
     a25_core dut(
-        .i_clk(bfm.i_clk),
+        .i_clk(bfm.clk_pseudo),
         .i_irq(bfm.i_irq),
         .i_firq(bfm.i_firq),
         .i_system_rdy(bfm.i_system_rdy),
@@ -29,6 +29,10 @@ module top;
         run_test();
     end
 
+    initial begin 
+        clk = 0 ;
+        forever #10 clk=~clk;
+    end
 endmodule : top
 
 
