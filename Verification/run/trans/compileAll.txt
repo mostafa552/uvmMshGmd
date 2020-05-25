@@ -1,5 +1,5 @@
 # QuestaSim-64 vcom 10.4e Compiler 2016.04 Apr  9 2016
-# Start time: 05:25:49 on May 24,2020
+# Start time: 03:45:58 on May 25,2020
 # vcom -f ../testing_leon/DUT_LEON.f 
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -464,10 +464,10 @@
 # -- Loading package tech_map
 # -- Compiling entity proc
 # -- Compiling architecture rtl of proc
-# End time: 05:25:53 on May 24,2020, Elapsed time: 0:00:04
+# End time: 03:46:02 on May 25,2020, Elapsed time: 0:00:04
 # Errors: 0, Warnings: 0
 # QuestaSim-64 vlog 10.4e Compiler 2016.04 Apr  9 2016
-# Start time: 05:25:53 on May 24,2020
+# Start time: 03:46:02 on May 25,2020
 # vlog "+incdir+../testing_leon+../common+../common/inst_h+../common/Tests+../common/sequences" ../testing_leon/target_pkg.sv 
 # -- Compiling package target_package
 # -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
@@ -479,36 +479,55 @@
 # ** while parsing file included at ../testing_leon/target_sequence_item.sv(1)
 # ** at ../testing_leon/leon_seq_item.sv(85): (vlog-2643) Unterminated string literal continues onto next line.
 # 
+# ** Error: ** while parsing file included at ../testing_leon/target_pkg.sv(1)
+# ** while parsing file included at ../testing_leon/leon_pkg.sv(69)
+# ** while parsing file included at ../common/GUVM.sv(22)
+# ** while parsing file included at ../common/GUVM_tests.svh(2)
+# ** at ../common/Tests/add_test.sv(10): (vlog-2730) Undefined variable: 'cmdline_proc'.
 # 
-# Top level modules:
-# 	--none--
-# End time: 05:25:53 on May 24,2020, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 1
-# QuestaSim-64 vlog 10.4e Compiler 2016.04 Apr  9 2016
-# Start time: 05:25:53 on May 24,2020
-# vlog ../testing_leon/leon_interface.sv 
-# -- Compiling interface GUVM_interface
-# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
-# ** Note: (vlog-2286) Using implicit +incdir+D:/installedPrograms/MentorGraphics/questasim64_10.4e/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+# ** Error: ** while parsing file included at ../testing_leon/target_pkg.sv(1)
+# ** while parsing file included at ../testing_leon/leon_pkg.sv(69)
+# ** while parsing file included at ../common/GUVM.sv(22)
+# ** while parsing file included at ../common/GUVM_tests.svh(3)
+# ** at ../common/Tests/bief_test.sv(11): (vlog-2730) Undefined variable: 'cmdline_proc'.
 # 
-# -- Importing package iface__mti__sv__equiv__implct__pack
-# -- Importing package target_package
+# ** Error: ** while parsing file included at ../testing_leon/target_pkg.sv(1)
+# ** while parsing file included at ../testing_leon/leon_pkg.sv(69)
+# ** while parsing file included at ../common/GUVM.sv(22)
+# ** while parsing file included at ../common/GUVM_tests.svh(4)
+# ** at ../common/Tests/child_test.sv(9): (vlog-2730) Undefined variable: 'cmdline_proc'.
 # 
-# Top level modules:
-# 	--none--
-# End time: 05:25:54 on May 24,2020, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 0
-# QuestaSim-64 vlog 10.4e Compiler 2016.04 Apr  9 2016
-# Start time: 05:25:54 on May 24,2020
-# vlog ../testing_leon/top.sv 
-# -- Compiling module top
-# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
-# -- Importing package target_package
-# -- Importing package iface__mti__sv__equiv__implct__pack
-# ** Note: (vlog-2286) Using implicit +incdir+D:/installedPrograms/MentorGraphics/questasim64_10.4e/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+# ** Error: ** while parsing file included at ../testing_leon/target_pkg.sv(1)
+# ** while parsing file included at ../testing_leon/leon_pkg.sv(69)
+# ** while parsing file included at ../common/GUVM.sv(22)
+# ** while parsing file included at ../common/GUVM_tests.svh(6)
+# ** at ../common/Tests/subcc_test.sv(10): (vlog-2730) Undefined variable: 'cmdline_proc'.
 # 
+# ** Error: ** while parsing file included at ../testing_leon/target_pkg.sv(1)
+# ** while parsing file included at ../testing_leon/leon_pkg.sv(69)
+# ** while parsing file included at ../common/GUVM.sv(22)
+# ** while parsing file included at ../common/GUVM_tests.svh(7)
+# ** at ../common/Tests/load_double_test.sv(10): (vlog-2730) Undefined variable: 'cmdline_proc'.
 # 
-# Top level modules:
-# 	top
-# End time: 05:25:54 on May 24,2020, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
+# ** Error: ** while parsing file included at ../testing_leon/target_pkg.sv(1)
+# ** while parsing file included at ../testing_leon/leon_pkg.sv(69)
+# ** while parsing file included at ../common/GUVM.sv(22)
+# ** while parsing file included at ../common/GUVM_tests.svh(8)
+# ** at ../common/Tests/addxcc_test.sv(8): (vlog-2730) Undefined variable: 'cmdline_proc'.
+# 
+# ** Error: ** while parsing file included at ../testing_leon/target_pkg.sv(1)
+# ** while parsing file included at ../testing_leon/leon_pkg.sv(69)
+# ** while parsing file included at ../common/GUVM.sv(22)
+# ** while parsing file included at ../common/GUVM_tests.svh(9)
+# ** at ../common/Tests/store_test.sv(10): (vlog-2730) Undefined variable: 'cmdline_proc'.
+# 
+# ** Error: ** while parsing file included at ../testing_leon/target_pkg.sv(1)
+# ** while parsing file included at ../testing_leon/leon_pkg.sv(69)
+# ** while parsing file included at ../common/GUVM.sv(22)
+# ** while parsing file included at ../common/GUVM_tests.svh(10)
+# ** at ../common/Tests/mul_test.sv(8): (vlog-2730) Undefined variable: 'cmdline_proc'.
+# 
+# End time: 03:46:02 on May 25,2020, Elapsed time: 0:00:00
+# Errors: 8, Warnings: 1
+# ** Error: D:/installedPrograms/MentorGraphics/questasim64_10.4e/win64/vlog failed.
+# Executing ONERROR command at macro ./../testing_leon/run_leon.do line 7
